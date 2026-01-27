@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { BRAND } from "../data/brand";
+import { Menu, X } from "lucide-react";
 
 function linkClass({ isActive }) {
   return [
@@ -10,8 +11,11 @@ function linkClass({ isActive }) {
 }
 
 export default function TopBar() {
+  const [open, setOpen] = React.useState(false);
+
   return (
     <header className="border-b border-slate-200 sticky top-0 bg-white/80 backdrop-blur z-50">
+      {/* Top info bar (desktop only) */}
       <div className="hidden md:block border-b border-slate-200/60 bg-white/40">
         <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between text-xs text-slate-600">
           <div className="truncate">{BRAND.address}</div>
@@ -32,9 +36,14 @@ export default function TopBar() {
         </div>
       </div>
 
+      {/* Main nav */}
       <nav className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3 sm:gap-4">
         {/* Brand */}
-        <NavLink to="/" className="flex items-center shrink-0">
+        <NavLink
+          to="/"
+          className="flex items-center shrink-0"
+          onClick={() => setOpen(false)}
+        >
           <img
             src="/logo.png"
             alt="A&T Avionics and Maintenance"
@@ -42,7 +51,7 @@ export default function TopBar() {
           />
         </NavLink>
 
-        {/* Desktop Nav */}
+        {/* Desktop navigation */}
         <div className="hidden md:flex items-center gap-1">
           <NavLink to="/" end className={linkClass}>
             Home
@@ -61,31 +70,71 @@ export default function TopBar() {
           </NavLink>
         </div>
 
-        {/* CTA */}
-        <NavLink
-          to="/contact"
-          className="shrink-0 inline-flex items-center justify-center rounded-2xl bg-slate-900 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-slate-800 transition"
-        >
-          Get a Quote
-        </NavLink>
+        {/* Actions */}
+        <div className="flex items-center gap-2">
+          {/* CTA */}
+          <NavLink
+            to="/contact"
+            className="shrink-0 inline-flex items-center justify-center rounded-2xl bg-slate-900 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-slate-800 transition"
+            onClick={() => setOpen(false)}
+          >
+            Get a Quote
+          </NavLink>
+
+          {/* Hamburger (mobile only) */}
+          <button
+            type="button"
+            className="md:hidden inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-3 py-2 text-slate-900 hover:bg-slate-50 transition"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile Nav */}
-      <div className="md:hidden border-t border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 py-2 flex flex-wrap gap-2">
-          <NavLink to="/" end className={linkClass}>
+      {/* Mobile dropdown (animated) */}
+      <div
+        className={`md:hidden overflow-hidden border-t border-slate-200 bg-white/95 backdrop-blur transition-all duration-300 ease-out ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-4 py-3 grid gap-2">
+          <NavLink
+            to="/"
+            end
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
             Home
           </NavLink>
-          <NavLink to="/services" className={linkClass}>
+          <NavLink
+            to="/services"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
             Services
           </NavLink>
-          <NavLink to="/capabilities" className={linkClass}>
+          <NavLink
+            to="/capabilities"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
             Capabilities
           </NavLink>
-          <NavLink to="/about" className={linkClass}>
+          <NavLink
+            to="/about"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
             About
           </NavLink>
-          <NavLink to="/contact" className={linkClass}>
+          <NavLink
+            to="/contact"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
             Contact
           </NavLink>
         </div>

@@ -3,7 +3,6 @@ import PageShell from "../components/PageShell";
 import { Link } from "react-router-dom";
 import { FileCheck2, ShieldCheck, Timer, UserRound } from "lucide-react";
 import CTA from "../components/CTA";
-import { BRAND } from "../data/brand";
 
 export default function About() {
   const team = [
@@ -36,18 +35,21 @@ export default function About() {
       title="About A&T"
       subtitle="Built on precision, trust, and aviation professionalism."
     >
-      <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-        <div className="surface p-6 md:p-8 text-slate-700">
-          <div className="rounded-3xl overflow-hidden border border-slate-200 bg-slate-100">
-            <div className="relative h-44 sm:h-56">
+      {/* Main content */}
+      <div className="max-w-6xl mx-auto w-full surface p-6 md:p-8 text-slate-700">
+        {/* Image + text (Option A) */}
+        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          {/* Image */}
+          <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-100">
+            <div className="relative aspect-[4/3]">
               <img
                 src="/images/cessna-152.jpg"
                 alt="General aviation aircraft"
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3">
                 <div className="inline-flex items-center rounded-full bg-white/90 backdrop-blur px-3 py-1 text-xs font-semibold text-slate-900">
                   General aviation, done right
                 </div>
@@ -55,66 +57,55 @@ export default function About() {
             </div>
           </div>
 
-          <p className="mt-6 text-slate-800">
-            We focus on clean workmanship, clear communication, and dependable
-            outcomes. That means tidy routing, disciplined testing, and
-            documentation that makes future service easier.
-          </p>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <Principle
-              icon={ShieldCheck}
-              title="Quality workmanship"
-              body="Clean routing, consistent labeling, and attention to detail."
-            />
-            <Principle
-              icon={FileCheck2}
-              title="Documentation-first"
-              body="Clear close-out notes so you know what was done and why."
-            />
-            <Principle
-              icon={Timer}
-              title="Respect your time"
-              body="Simple updates and clear decisions when scope affects schedule."
-            />
-          </div>
-
-          <div className="mt-6 surface-muted p-6">
-            <div className="text-sm font-semibold">What we need to quote</div>
-            <p className="mt-2 text-sm text-slate-600">
-              Aircraft make/model, tail number, current avionics (if known), and
-              the outcome you want. That’s enough to start.
+          {/* Text */}
+          <div>
+            <p className="text-slate-800 text-base md:text-lg leading-relaxed">
+              We focus on clean workmanship, clear communication, and dependable
+              outcomes. That means tidy routing, disciplined testing, and
+              documentation that makes future service easier.
             </p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <Link to="/contact" className="btn-primary">
-                Request a Quote
-              </Link>
-              <Link to="/services" className="btn-secondary">
-                View services
-              </Link>
-            </div>
           </div>
         </div>
 
-        <aside className="surface p-6 md:p-8">
-          <div className="text-sm font-semibold">At a glance</div>
-          <div className="mt-4 grid gap-3 text-sm text-slate-700">
-            <InfoRow label="Shop" value={BRAND.name} />
-            <InfoRow label="Phone" value={BRAND.phone} />
-            <InfoRow label="Email" value={BRAND.email} />
-            <InfoRow label="Location" value={BRAND.address} />
-            <InfoRow label="Hours" value={BRAND.hours} />
-          </div>
+        {/* Principles */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Principle
+            icon={ShieldCheck}
+            title="Quality workmanship"
+            body="Clean routing, consistent labeling, and attention to detail."
+          />
+          <Principle
+            icon={FileCheck2}
+            title="Documentation-first"
+            body="Clear close-out notes so you know what was done and why."
+          />
+          <Principle
+            icon={Timer}
+            title="Respect your time"
+            body="Simple updates and clear decisions when scope affects schedule."
+          />
+        </div>
 
-          <div className="mt-6 text-xs text-slate-500">
-            Want this page to include your certifications, brands you install,
-            and airports you serve? Tell me what to add and I’ll format it
-            professionally.
+        {/* Quote section */}
+        <div className="mt-8 surface-muted p-6">
+          <div className="text-sm font-semibold">What we need to quote</div>
+          <p className="mt-2 text-sm text-slate-600">
+            Aircraft make/model, tail number, current avionics (if known), and
+            the outcome you want. That’s enough to start.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link to="/contact" className="btn-primary">
+              Request a Quote
+            </Link>
+            <Link to="/services" className="btn-secondary">
+              View services
+            </Link>
           </div>
-        </aside>
+        </div>
       </div>
 
-      <section className="mt-10 surface p-6 md:p-8">
+      {/* Team */}
+      <section className="mt-10 max-w-6xl mx-auto w-full surface p-6 md:p-8">
         <div className="text-xs font-semibold tracking-wider uppercase text-brand-accent">
           Team
         </div>
@@ -133,7 +124,7 @@ export default function About() {
         </div>
       </section>
 
-      <div className="mt-10">
+      <div className="mt-10 max-w-6xl mx-auto w-full">
         <CTA />
       </div>
     </PageShell>
@@ -156,24 +147,12 @@ function Principle({ icon: Icon, title, body }) {
   );
 }
 
-function InfoRow({ label, value }) {
-  return (
-    <div className="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 border border-slate-200 p-3">
-      <div className="text-xs text-slate-500">{label}</div>
-      <div className="text-sm font-semibold text-slate-900 text-right break-words max-w-[65%]">
-        {value}
-      </div>
-    </div>
-  );
-}
-
 function EmployeeCard({ person }) {
   const [imgOk, setImgOk] = React.useState(true);
 
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-6">
       <div className="flex items-start gap-4">
-        {/* Photo */}
         <div className="relative h-16 w-16 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shrink-0">
           {person.photo && imgOk ? (
             <img
@@ -190,10 +169,8 @@ function EmployeeCard({ person }) {
           )}
         </div>
 
-        {/* Text */}
         <div className="min-w-0">
           <div className="flex items-start gap-2">
-            {/* IMPORTANT: no truncate here */}
             <div className="font-semibold text-slate-900 break-words leading-snug">
               {person.name}
             </div>
@@ -204,11 +181,30 @@ function EmployeeCard({ person }) {
             {person.role}
           </div>
 
-          <p className="mt-3 text-[13px] text-slate-600 leading-6">
+          <p className="mt-3 text-[13px] text-slate-600 leading-6 text-left">
             {person.bio}
           </p>
         </div>
       </div>
     </div>
   );
+}
+
+{
+  /* <aside className="surface p-6 md:p-8">
+          <div className="text-sm font-semibold">At a glance</div>
+          <div className="mt-4 grid gap-3 text-sm text-slate-700">
+            <InfoRow label="Shop" value={BRAND.name} />
+            <InfoRow label="Phone" value={BRAND.phone} />
+            <InfoRow label="Email" value={BRAND.email} />
+            <InfoRow label="Location" value={BRAND.address} />
+            <InfoRow label="Hours" value={BRAND.hours} />
+          </div>
+
+          <div className="mt-6 text-xs text-slate-500">
+            Want this page to include your certifications, brands you install,
+            and airports you serve? Tell me what to add and I’ll format it
+            professionally.
+          </div>
+        </aside> */
 }
