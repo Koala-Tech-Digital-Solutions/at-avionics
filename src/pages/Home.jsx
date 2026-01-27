@@ -19,8 +19,25 @@ export default function Home() {
     <main>
       {/* Hero */}
       <div className="relative overflow-hidden">
+        {/* Background airplane image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero-airplane.jpg"
+            alt="Airplane"
+            className="h-full w-full object-cover"
+            loading="eager"
+          />
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-slate-950/55" />
+          {/* Optional extra gradient for polish */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/10 to-white/0" />
+        </div>
+
+        {/* Your existing decorative radial gradient */}
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(900px_circle_at_20%_10%,rgba(37,99,235,0.18),transparent_55%),radial-gradient(700px_circle_at_80%_0%,rgba(15,23,42,0.10),transparent_55%)]" />
-        <div className="max-w-6xl mx-auto px-4 pt-12 pb-10 md:pt-16 md:pb-14">
+
+        {/* Content */}
+        <div className="relative max-w-6xl mx-auto px-4 pt-12 pb-10 md:pt-16 md:pb-14">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -28,15 +45,15 @@ export default function Home() {
             className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center"
           >
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 backdrop-blur px-3 py-1 text-xs font-semibold text-slate-700">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur px-3 py-1 text-xs font-semibold text-white">
                 <BadgeCheck className="h-4 w-4 text-brand-accent" />
                 Documentation-first installs · Clear communication
               </div>
 
-              <h1 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight">
+              <h1 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-white">
                 Precision avionics work — built to fly.
               </h1>
-              <p className="mt-4 text-slate-600 text-base md:text-lg max-w-prose">
+              <p className="mt-4 text-white/80 text-base md:text-lg max-w-prose">
                 Upgrade with confidence. We focus on clean workmanship, verified
                 testing, and clear documentation so you can get back in the air
                 without surprises.
@@ -51,23 +68,23 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-600">
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/80">
                 <span className="inline-flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-slate-700" /> Safety &
+                  <ShieldCheck className="h-4 w-4 text-white" /> Safety &
                   quality workmanship
                 </span>
                 <span className="inline-flex items-center gap-2">
-                  <FileCheck2 className="h-4 w-4 text-slate-700" /> Clean
+                  <FileCheck2 className="h-4 w-4 text-white" /> Clean
                   documentation & labeling
                 </span>
                 <span className="inline-flex items-center gap-2">
-                  <Timer className="h-4 w-4 text-slate-700" /> Clear timelines &
+                  <Timer className="h-4 w-4 text-white" /> Clear timelines &
                   updates
                 </span>
               </div>
             </div>
 
-            <div className="surface-muted p-6 md:p-8">
+            <div className="surface-muted p-6 md:p-8 bg-white/85 backdrop-blur">
               <div className="text-sm font-semibold">Fast quote request</div>
               <p className="mt-2 text-sm text-slate-600">
                 Share your aircraft, tail number, and what you want to
@@ -79,13 +96,17 @@ export default function Home() {
                   <div className="text-xs font-semibold text-slate-500">
                     Phone
                   </div>
-                  <div className="mt-1 text-sm font-semibold">{BRAND.phone}</div>
+                  <div className="mt-1 text-sm font-semibold">
+                    {BRAND.phone}
+                  </div>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white p-4">
                   <div className="text-xs font-semibold text-slate-500">
                     Email
                   </div>
-                  <div className="mt-1 text-sm font-semibold">{BRAND.email}</div>
+                  <div className="mt-1 text-sm font-semibold">
+                    {BRAND.email}
+                  </div>
                 </div>
               </div>
 
@@ -211,7 +232,7 @@ function PhotoGrid() {
     {
       src: "/images/cessna-152.jpg",
       alt: "Cessna 152 aircraft on the ramp",
-      label: "Training & GA aircraft",
+      label: "Experts who help you get the best out of your aircraft.",
     },
     {
       src: "/images/glass-cockpit.jpg",
