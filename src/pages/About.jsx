@@ -10,19 +10,22 @@ export default function About() {
     {
       name: "Wilfer Ossa",
       role: "Avionics Specialist",
-      bio: "Retired from the Colombian Air Force with 25 years of experience in avionics. Served as an Avionics Technician, Inspector, and Section Chief of Avionics. Holds an active FCC General Radiotelephone Operator License. Extensive knowledge in troubleshooting, maintenance, and system integration. Currently has 2 years of hands-on experience in the U.S. aviation sector, specializing in panel with a specialization in panel upgrades (analog to digital conversions).",
+      photo: "/images/team/wilfer-ossa.jpg",
+      bio: "Retired Colombian Air Force avionics professional with 25 years of experience as a technician, inspector, and avionics section chief. Holds an active FCC General Radiotelephone Operator License. Extensive background in troubleshooting, maintenance, and system integration, with 2 years of hands-on experience in U.S. general aviation focused on clean panel upgrades and analog-to-digital conversions.",
       initials: "WO",
     },
     {
       name: "Carlos Garcia",
       role: "Avionics Technician",
-      bio: "Avionics and electrical systems technician with over 25 years of experience. Formerly employed by Aviónica de Occidente (Cali, Colombia) as a certified Aircraft Maintenance Technician (TMA 0837), focused on avionics installations, inspections, and repairs. Holds an active FCC General Radiotelephone Operator License. Brings 3 years of experience working in the U.S. general aviation industry. Skilled in maintenance and avionics integration on a range of airframes, including Cessna 150/152/180/182 and Piper PA-28 series.",
+      photo: "/images/team/carlos-garcia.jpg",
+      bio: "Avionics and electrical systems technician with over 25 years of experience. Former Aviónica de Occidente (Cali, Colombia) Aircraft Maintenance Technician (TMA 0837), specializing in avionics installations, inspections, and repairs. Holds an active FCC General Radiotelephone Operator License and brings 3 years of experience in U.S. general aviation, supporting aircraft including Cessna 150/152/180/182 and Piper PA-28 series.",
       initials: "CG",
     },
     {
-      name: "Rubén Darío Charry Reinoso ",
-      role: "Role / Title",
-      bio: "Aeronautical maintenance technologist and industrial engineer with a solid track record in asset optimization, reliability, and business processes. Specialized in asset management in complex environments, with expertise in comprehensive solutions for the aviation industry. Trained in maintenance planning, scheduling, and strategic maintenance management, integrating technical rigor with strategic vision.",
+      name: "Rubén Darío Charry Reinoso",
+      role: "Maintenance Planning & Asset Management",
+      photo: "/images/team/ruben-charry.jpg",
+      bio: "Aeronautical maintenance technologist and industrial engineer with a strong background in reliability, asset optimization, and maintenance strategy. Experienced in maintenance planning, scheduling, and process improvement in complex aviation environments, supporting clear documentation, consistent standards, and dependable outcomes.",
       initials: "RD",
     },
   ];
@@ -52,7 +55,7 @@ export default function About() {
             </div>
           </div>
 
-          <p className="text-slate-800">
+          <p className="mt-6 text-slate-800">
             We focus on clean workmanship, clear communication, and dependable
             outcomes. That means tidy routing, disciplined testing, and
             documentation that makes future service easier.
@@ -124,8 +127,8 @@ export default function About() {
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {team.map((p, idx) => (
-            <EmployeeCard key={idx} person={p} />
+          {team.map((p) => (
+            <EmployeeCard key={p.name} person={p} />
           ))}
         </div>
       </section>
@@ -165,21 +168,45 @@ function InfoRow({ label, value }) {
 }
 
 function EmployeeCard({ person }) {
+  const [imgOk, setImgOk] = React.useState(true);
+
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-6">
       <div className="flex items-start gap-4">
-        <div className="h-14 w-14 rounded-2xl bg-slate-900 text-white grid place-items-center shrink-0">
-          <span className="font-semibold">{person.initials || "AT"}</span>
+        {/* Photo */}
+        <div className="relative h-16 w-16 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shrink-0">
+          {person.photo && imgOk ? (
+            <img
+              src={person.photo}
+              alt={`${person.name} headshot`}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              onError={() => setImgOk(false)}
+            />
+          ) : (
+            <div className="h-full w-full grid place-items-center bg-slate-900 text-white">
+              <span className="font-semibold">{person.initials || "AT"}</span>
+            </div>
+          )}
         </div>
+
+        {/* Text */}
         <div className="min-w-0">
-          <div className="flex items-center gap-2">
-            <div className="font-semibold text-slate-900 truncate">
+          <div className="flex items-start gap-2">
+            {/* IMPORTANT: no truncate here */}
+            <div className="font-semibold text-slate-900 break-words leading-snug">
               {person.name}
             </div>
-            <UserRound className="h-4 w-4 text-slate-400" />
+            <UserRound className="h-4 w-4 text-slate-400 mt-0.5 shrink-0" />
           </div>
-          <div className="mt-1 text-sm text-slate-600">{person.role}</div>
-          <p className="mt-3 text-sm text-slate-600">{person.bio}</p>
+
+          <div className="mt-1 text-sm text-slate-600 break-words">
+            {person.role}
+          </div>
+
+          <p className="mt-3 text-[13px] text-slate-600 leading-6">
+            {person.bio}
+          </p>
         </div>
       </div>
     </div>
