@@ -38,20 +38,37 @@ export default function Contact() {
     !form.aircraft.trim() ||
     !form.request.trim();
 
+  const subject = useMemo(() => {
+    const aircraft = form.aircraft || "Aircraft";
+    const tail = form.tailNumber ? ` (${form.tailNumber})` : "";
+    return `Quote request — ${aircraft}${tail}`;
+  }, [form.aircraft, form.tailNumber]);
+
   const payload = useMemo(
     () => ({
       name: form.name,
       email: form.email,
+      _replyto: form.email, // Formspree convention
       phone: form.phone,
       aircraft: form.aircraft,
       tailNumber: form.tailNumber,
       currentAvionics: form.avionics,
       requestedWork: form.request,
       timeline: form.timeline,
-      // Helpful metadata for inbox filtering in form providers.
-      subject: `Quote request — ${form.aircraft}${form.tailNumber ? ` (${form.tailNumber})` : ""}`,
+      subject,
+      // Formspree also commonly uses "message"
+      message: [
+        `Name: ${form.name || "-"}`,
+        `Email: ${form.email || "-"}`,
+        `Phone: ${form.phone || "-"}`,
+        `Aircraft: ${form.aircraft || "-"}`,
+        `Tail Number: ${form.tailNumber || "-"}`,
+        `Current Avionics: ${form.avionics || "-"}`,
+        `Requested Work: ${form.request || "-"}`,
+        `Timeline: ${form.timeline || "-"}`,
+      ].join("\n"),
     }),
-    [form]
+    [form, subject]
   );
 
   const canSubmit =
@@ -62,9 +79,6 @@ export default function Contact() {
     navigator.onLine !== false;
 
   const mailtoHref = useMemo(() => {
-    const subject = `Quote request — ${form.aircraft || "Aircraft"}${
-      form.tailNumber ? ` (${form.tailNumber})` : ""
-    }`;
     const body = [
       `Name: ${form.name || "-"}`,
       `Email: ${form.email || "-"}`,
@@ -76,10 +90,10 @@ export default function Contact() {
       `Timeline: ${form.timeline || "-"}`,
     ].join("\n");
 
-    return `mailto:${encodeURIComponent(BRAND.email)}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-  }, [form]);
+    return `mailto:${encodeURIComponent(
+      BRAND.email
+    )}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }, [form, subject]);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -94,7 +108,8 @@ export default function Contact() {
     if (Date.now() - startedAt < 1500) {
       setStatus({
         state: "error",
-        message: "Please take a moment to review your details, then submit again.",
+        message:
+          "Please take a moment to review your details, then submit again.",
       });
       return;
     }
@@ -140,7 +155,6 @@ export default function Contact() {
         return;
       }
 
-      // redirect on success
       navigate("/thanks");
     } catch {
       setStatus({
@@ -265,8 +279,8 @@ export default function Contact() {
 
           {!FORMSPREE_ENDPOINT ? (
             <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
-              The on-site form is not configured yet. Create a Formspree form and
-              set <code>VITE_FORMSPREE_ENDPOINT</code> in <code>.env</code>.
+              The on-site form is not configured yet. Create a Formspree form
+              and set <code>VITE_FORMSPREE_ENDPOINT</code> in <code>.env</code>.
             </div>
           ) : null}
 
