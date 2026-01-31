@@ -7,25 +7,26 @@ import CTA from "../components/CTA";
 export default function About() {
   const team = [
     {
+      name: "Rubén Darío Charry Reinoso",
+      role: "Accountable Manager",
+      photo: "/images/team/ruben-charry.jpg",
+      bio: "Supports repair station operations through maintenance planning, scheduling, reliability analysis, and process improvement. Focused on documentation control, asset optimization, and operational efficiency aligned with U.S. aviation standards.",
+      initials: "RD",
+    },
+    {
       name: "Wilfer Ossa",
-      role: "Avionics Specialist",
+      role: "Quality Manager",
       photo: "/images/team/wilfer-ossa.jpg",
-      bio: "Retired Colombian Air Force avionics professional with 25 years of experience as a technician, inspector, and avionics section chief. Holds an active FCC General Radiotelephone Operator License. Extensive background in troubleshooting, maintenance, and system integration, with 2 years of hands-on experience in U.S. general aviation focused on clean panel upgrades and analog-to-digital conversions.",
+      bio: "Avionics specialist with extensive experience in troubleshooting, system integration, and inspections. Former Colombian Air Force avionics technician and inspector, currently supporting U.S. general aviation with a focus on clean panel upgrades, analog-to-digital conversions, and documentation-first installations. Holds an active FCC General Radiotelephone Operator License.",
       initials: "WO",
     },
+
     {
       name: "Carlos Garcia",
-      role: "Avionics Technician",
+      role: "Avionics Lead Technician",
       photo: "/images/team/carlos-garcia.jpg",
-      bio: "Avionics and electrical systems technician with over 25 years of experience. Former Aviónica de Occidente (Cali, Colombia) Aircraft Maintenance Technician (TMA 0837), specializing in avionics installations, inspections, and repairs. Holds an active FCC General Radiotelephone Operator License and brings 3 years of experience in U.S. general aviation, supporting aircraft including Cessna 150/152/180/182 and Piper PA-28 series.",
+      bio: "Avionics technician with over 25 years of experience in installations, inspections, and repairs. Currently supporting U.S. general aviation aircraft, including Cessna and Piper platforms, with a focus on reliable avionics integration and compliant maintenance practices. Holds an active FCC General Radiotelephone Operator License.",
       initials: "CG",
-    },
-    {
-      name: "Rubén Darío Charry Reinoso",
-      role: "Maintenance Planning & Asset Management",
-      photo: "/images/team/ruben-charry.jpg",
-      bio: "Aeronautical maintenance technologist and industrial engineer with a strong background in reliability, asset optimization, and maintenance strategy. Experienced in maintenance planning, scheduling, and process improvement in complex aviation environments, supporting clear documentation, consistent standards, and dependable outcomes.",
-      initials: "RD",
     },
   ];
 
@@ -87,7 +88,7 @@ export default function About() {
         </div>
 
         {/* Quote section */}
-        <div className="mt-8 surface-muted p-6">
+        {/* <div className="mt-8 surface-muted p-6">
           <div className="text-sm font-semibold">What we need to quote</div>
           <p className="mt-2 text-sm text-slate-600">
             Aircraft make/model, tail number, current avionics (if known), and
@@ -101,7 +102,7 @@ export default function About() {
               View services
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Team */}

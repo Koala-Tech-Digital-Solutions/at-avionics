@@ -1,97 +1,114 @@
 import React from "react";
 import PageShell from "../components/PageShell";
-import { Link } from "react-router-dom";
-import { CheckCircle2, ClipboardList, FileCheck2, Wrench } from "lucide-react";
+import { Tag } from "lucide-react";
 import CTA from "../components/CTA";
+import BeforeAfter from "../components/BeforeAfter";
+import Lightbox from "../components/Lightbox";
+import { GALLERY_ITEMS } from "../data/gallery";
 
 export default function Capabilities() {
+  const filters = React.useMemo(() => {
+    const tags = Array.from(new Set(GALLERY_ITEMS.map((i) => i.tag)));
+    return ["All", ...tags];
+  }, []);
+
+  const [active, setActive] = React.useState("All");
+  const [selected, setSelected] = React.useState(null);
+
+  const shown =
+    active === "All"
+      ? GALLERY_ITEMS
+      : GALLERY_ITEMS.filter((i) => i.tag === active);
+
   return (
     <PageShell
       eyebrow="Capabilities"
-      title="Capabilities"
-      subtitle="A consistent process focused on safety, clarity, and quality workmanship — from planning to final sign‑off."
+      title="Work Gallery"
+      subtitle="Before/after examples of our workmanship — clean installs, tidy routing, and documentation-first close-out."
     >
-      <div className="grid gap-4 md:grid-cols-3">
-        <Step
-          icon={ClipboardList}
-          title="1) Scope & plan"
-          body="We gather aircraft + goals, confirm constraints, and outline the work so the estimate is clear."
-        />
-        <Step
-          icon={Wrench}
-          title="2) Install cleanly"
-          body="Tidy routing, consistent labeling, and workmanship that looks intentional — not improvised."
-        />
-        <Step
-          icon={CheckCircle2}
-          title="3) Test & deliver"
-          body="Functional checks and a disciplined close-out so you can fly with confidence."
-        />
-      </div>
-
-      <div className="mt-8 surface p-6 md:p-8">
-        <div className="grid gap-6 md:grid-cols-2 md:items-start">
-          <div>
-            <div className="text-lg font-semibold">What we can help with</div>
-            <p className="mt-2 text-sm text-slate-600">
-              Common work requests we handle across installations, upgrades, and
-              troubleshooting.
-            </p>
-
-            <ul className="mt-4 grid gap-2 text-sm text-slate-700">
-              {[
-                "IFR-ready installations",
-                "ADS-B solutions and compliance support",
-                "Panel planning & layout",
-                "Harness building, wiring repair, connector work",
-                "Post-install testing & functional checks",
-                "Clear documentation and follow-through",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <FileCheck2 className="h-4 w-4 mt-0.5 text-brand-accent" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="surface-muted p-6">
-            <div className="text-sm font-semibold">Get scoped quickly</div>
-            <p className="mt-2 text-sm text-slate-600">
-              The fastest way to start is to share aircraft, tail number, and
-              the outcome you want. We’ll respond with next steps.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Link to="/contact" className="btn-primary">
-                Request a Quote
-              </Link>
-              <Link to="/services" className="btn-secondary">
-                View services
-              </Link>
-            </div>
-          </div>
+      {/* Filters */}
+      <div className="surface p-6 md:p-8">
+        <div className="flex flex-wrap gap-2">
+          {filters.map((f) => {
+            const on = active === f;
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setActive(f)}
+                className={[
+                  "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold transition border",
+                  on
+                    ? "bg-slate-900 text-white border-slate-900"
+                    : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50",
+                ].join(" ")}
+              >
+                <Tag className="h-3.5 w-3.5" />
+                {f}
+              </button>
+            );
+          })}
         </div>
       </div>
+
+      {/* Gallery grid */}
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {shown.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            onClick={() => setSelected(item)}
+            className="surface overflow-hidden text-left hover:shadow-lg transition"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+              <BeforeAfter
+                before={item.thumbBefore || item.before}
+                after={item.thumbAfter || item.after}
+                alt={item.alt}
+                className="absolute inset-0"
+              />
+            </div>
+
+            <div className="p-4">
+              <div className="font-semibold text-slate-900">{item.title}</div>
+              <div className="mt-1 text-xs text-slate-600">{item.tag}</div>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {/* Lightbox */}
+      <Lightbox
+        open={!!selected}
+        onClose={() => setSelected(null)}
+        title={selected?.title}
+      >
+        {selected ? (
+          <div className="grid gap-4">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
+              <BeforeAfter
+                before={selected.before}
+                after={selected.after}
+                alt={selected.alt}
+                // optional placeholders (use thumbs so it loads instantly)
+                placeholderBefore={selected.thumbBefore}
+                placeholderAfter={selected.thumbAfter}
+                className="absolute inset-0"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <span className="inline-flex items-center rounded-full bg-white/10 border border-white/10 text-white text-xs font-semibold px-3 py-1">
+                {selected.tag}
+              </span>
+            </div>
+          </div>
+        ) : null}
+      </Lightbox>
 
       <div className="mt-10">
         <CTA />
       </div>
     </PageShell>
-  );
-}
-
-function Step({ icon: Icon, title, body }) {
-  return (
-    <div className="surface p-6">
-      <div className="flex items-start gap-3">
-        <div className="h-10 w-10 rounded-2xl bg-brand-accent/10 text-brand-accent grid place-items-center">
-          <Icon className="h-5 w-5" />
-        </div>
-        <div>
-          <div className="font-semibold">{title}</div>
-          <p className="mt-2 text-sm text-slate-600">{body}</p>
-        </div>
-      </div>
-    </div>
   );
 }

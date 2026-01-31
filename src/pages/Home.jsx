@@ -13,6 +13,7 @@ import {
 import CTA from "../components/CTA";
 import Section from "../components/Section";
 import { BRAND } from "../data/brand";
+import FeaturedInstalls from "../components/FeaturedInstalls";
 
 export default function Home() {
   return (
@@ -60,9 +61,9 @@ export default function Home() {
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link to="/contact" className="btn-primary gap-2">
+                {/* <Link to="/contact" className="btn-primary gap-2">
                   Request a Quote <ArrowRight className="h-4 w-4" />
-                </Link>
+                </Link> */}
                 <Link to="/services" className="btn-secondary">
                   Explore Services
                 </Link>
@@ -84,7 +85,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="surface-muted p-6 md:p-8 bg-white/85 backdrop-blur">
+            {/* <div className="surface-muted p-6 md:p-8 bg-white/85 backdrop-blur">
               <div className="text-sm font-semibold">Fast quote request</div>
               <p className="mt-2 text-sm text-slate-600">
                 Share your aircraft, tail number, and what you want to
@@ -118,7 +119,7 @@ export default function Home() {
                 No long calls required — just the details we need to scope the
                 work.
               </p>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </div>
@@ -147,7 +148,9 @@ export default function Home() {
               body="Labeling standards, clean routing, and post-install checks you can trust."
             />
           </div>
-
+          <div className="mt-6 flex flex-wrap gap-3">
+            <FeaturedInstalls />
+          </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link to="/services" className="btn-secondary">
               See full services

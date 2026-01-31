@@ -23,9 +23,9 @@ export default function CTA({
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link to="/contact" className="btn-primary gap-2">
+            {/* <Link to="/contact" className="btn-primary gap-2">
               Request a Quote <ArrowRight className="h-4 w-4" />
-            </Link>
+            </Link> */}
             <a
               href={`tel:${BRAND.phone.replace(/[^0-9+]/g, "")}`}
               className="btn-secondary gap-2"
@@ -39,4 +39,3 @@ export default function CTA({
     </section>
   );
 }
-
