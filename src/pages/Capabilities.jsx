@@ -53,28 +53,41 @@ export default function Capabilities() {
 
       {/* Gallery grid */}
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {shown.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            onClick={() => setSelected(item)}
-            className="surface overflow-hidden text-left hover:shadow-lg transition"
-          >
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-              <BeforeAfter
-                before={item.thumbBefore || item.before}
-                after={item.thumbAfter || item.after}
-                alt={item.alt}
-                className="absolute inset-0"
-              />
-            </div>
+        {shown.map((item) => {
+          const isBeforeAfter = !!(item.before && item.after);
 
-            <div className="p-4">
-              <div className="font-semibold text-slate-900">{item.title}</div>
-              <div className="mt-1 text-xs text-slate-600">{item.tag}</div>
-            </div>
-          </button>
-        ))}
+          return (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => setSelected(item)}
+              className="surface overflow-hidden text-left hover:shadow-lg transition"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                {isBeforeAfter ? (
+                  <BeforeAfter
+                    before={item.thumbBefore || item.before}
+                    after={item.thumbAfter || item.after}
+                    alt={item.alt}
+                    className="absolute inset-0"
+                  />
+                ) : (
+                  <img
+                    src={item.thumb || item.image}
+                    alt={item.alt}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                )}
+              </div>
+
+              <div className="p-4">
+                <div className="font-semibold text-slate-900">{item.title}</div>
+                <div className="mt-1 text-xs text-slate-600">{item.tag}</div>
+              </div>
+            </button>
+          );
+        })}
       </div>
 
       {/* Lightbox */}
@@ -86,15 +99,23 @@ export default function Capabilities() {
         {selected ? (
           <div className="grid gap-4">
             <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10">
-              <BeforeAfter
-                before={selected.before}
-                after={selected.after}
-                alt={selected.alt}
-                // optional placeholders (use thumbs so it loads instantly)
-                placeholderBefore={selected.thumbBefore}
-                placeholderAfter={selected.thumbAfter}
-                className="absolute inset-0"
-              />
+              {selected.before && selected.after ? (
+                <BeforeAfter
+                  before={selected.before}
+                  after={selected.after}
+                  alt={selected.alt}
+                  placeholderBefore={selected.thumbBefore || selected.before}
+                  placeholderAfter={selected.thumbAfter || selected.after}
+                  className="absolute inset-0"
+                />
+              ) : (
+                <img
+                  src={selected.image}
+                  alt={selected.alt}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              )}
             </div>
 
             <div className="flex flex-wrap gap-2">
