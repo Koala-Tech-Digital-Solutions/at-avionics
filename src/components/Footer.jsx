@@ -47,7 +47,7 @@ export default function Footer() {
                 className="hover:text-slate-900 transition"
                 to="/capabilities"
               >
-                Capabilities
+                Gallery
               </Link>
               <Link className="hover:text-slate-900 transition" to="/about">
                 About
