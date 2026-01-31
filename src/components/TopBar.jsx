@@ -37,17 +37,18 @@ export default function TopBar() {
       </div>
 
       {/* Main nav */}
-      <nav className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3 sm:gap-4">
+      <nav className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-3 sm:gap-4 min-h-[76px] md:min-h-[88px]">
         {/* Brand */}
         <NavLink
           to="/"
           className="flex items-center shrink-0"
           onClick={() => setOpen(false)}
+          aria-label="Go to homepage"
         >
           <img
             src="/logo.png"
             alt="A&T Avionics and Maintenance"
-            className="h-12 sm:h-14 md:h-16 w-auto max-w-full transition-opacity hover:opacity-90"
+            className="h-12 sm:h-14 md:h-16 w-auto"
           />
         </NavLink>
 
