@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -13,7 +14,14 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <Routes>
-      <Route element={<Layout />}>
+      <Route
+        element={
+          <>
+            <ScrollToTop />
+            <Layout />
+          </>
+        }
+      >
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/capabilities" element={<Capabilities />} />

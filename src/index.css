@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global document sizing */
 html,
 body {
   height: 100%;
 }
 
+/* =========================
+   Base styles
+   ========================= */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-slate-50 text-slate-900 antialiased overflow-x-hidden;
   }
@@ -23,6 +31,9 @@ body {
   }
 }
 
+/* =========================
+   Component styles
+   ========================= */
 @layer components {
   .surface {
     @apply rounded-3xl border border-slate-200 bg-white shadow-sm;
