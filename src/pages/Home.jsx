@@ -243,7 +243,7 @@ function PhotoGrid() {
       label: "Modern avionics environments",
     },
     {
-      src: "/images/hangar.jpg",
+      src: "/images/hangar-v2.jpg",
       alt: "Aircraft hangar interior",
       label: "Organized workspace standards",
     },
