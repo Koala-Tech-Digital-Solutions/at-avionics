@@ -16,7 +16,7 @@ export default function Services() {
         <div className="surface overflow-hidden rounded-3xl">
           <div className="relative aspect-[16/6] sm:aspect-[16/5] md:aspect-[16/4]">
             <img
-              src="/images/hangar.jpg"
+              src="/images/hangar-v2.jpg"
               alt="Aircraft hangar"
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover"

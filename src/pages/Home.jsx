@@ -155,9 +155,9 @@ export default function Home() {
             <Link to="/services" className="btn-secondary">
               See full services
             </Link>
-            <Link to="/capabilities" className="btn-secondary">
+            {/* <Link to="/capabilities" className="btn-secondary">
               How we work
-            </Link>
+            </Link> */}
           </div>
         </Section>
 

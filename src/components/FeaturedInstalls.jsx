@@ -21,7 +21,7 @@ export default function FeaturedInstalls() {
           </p>
         </div>
 
-        <Link to="/capabilities" className="btn-secondary shrink-0">
+        <Link to="/gallery" className="btn-secondary shrink-0">
           View gallery
         </Link>
       </div>

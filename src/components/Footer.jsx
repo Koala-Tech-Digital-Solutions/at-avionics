@@ -43,10 +43,7 @@ export default function Footer() {
               <Link className="hover:text-slate-900 transition" to="/services">
                 Services
               </Link>
-              <Link
-                className="hover:text-slate-900 transition"
-                to="/capabilities"
-              >
+              <Link className="hover:text-slate-900 transition" to="/gallery">
                 Gallery
               </Link>
               <Link className="hover:text-slate-900 transition" to="/about">

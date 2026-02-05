@@ -60,7 +60,7 @@ export default function TopBar() {
           <NavLink to="/services" className={linkClass}>
             Services
           </NavLink>
-          <NavLink to="/capabilities" className={linkClass}>
+          <NavLink to="/gallery" className={linkClass}>
             Gallery
           </NavLink>
           <NavLink to="/about" className={linkClass}>

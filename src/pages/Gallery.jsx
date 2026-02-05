@@ -6,7 +6,7 @@ import BeforeAfter from "../components/BeforeAfter";
 import Lightbox from "../components/Lightbox";
 import { GALLERY_ITEMS } from "../data/gallery";
 
-export default function Capabilities() {
+export default function Gallery() {
   const filters = React.useMemo(() => {
     const tags = Array.from(new Set(GALLERY_ITEMS.map((i) => i.tag)));
     return ["All", ...tags];
@@ -22,7 +22,7 @@ export default function Capabilities() {
 
   return (
     <PageShell
-      eyebrow="Capabilities"
+      eyebrow="Gallery"
       title="Work Gallery"
       subtitle="Before/after examples of our workmanship — clean installs, tidy routing, and documentation-first close-out."
     >
