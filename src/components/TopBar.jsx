@@ -118,11 +118,11 @@ export default function TopBar() {
             Services
           </NavLink>
           <NavLink
-            to="/capabilities"
+            to="/gallery"
             className={linkClass}
             onClick={() => setOpen(false)}
           >
-            Capabilities
+            Gallery
           </NavLink>
           <NavLink
             to="/about"

@@ -14,7 +14,8 @@ export default function Services() {
       <div className="max-w-6xl mx-auto w-full">
         {/* Hero image (same width rhythm as cards) */}
         <div className="surface overflow-hidden rounded-3xl">
-          <div className="relative aspect-[16/6] sm:aspect-[16/5] md:aspect-[16/4]">
+          {/* ✅ Taller on mobile */}
+          <div className="relative aspect-[4/3] sm:aspect-[16/6] md:aspect-[16/5] lg:aspect-[16/4]">
             <img
               src="/images/hangar-v2.jpg"
               alt="Aircraft hangar"
@@ -22,17 +23,17 @@ export default function Services() {
               className="absolute inset-0 h-full w-full object-cover"
             />
 
-            {/* Softer overlay (less dark) */}
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/55 via-slate-900/25 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/10 via-transparent to-transparent" />
+            {/* ✅ Softer overlay but enough contrast for text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/55 via-slate-900/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
 
-            {/* Glass pill text */}
-            <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex items-end">
-              <div className="max-w-xl rounded-2xl border border-white/20 bg-white/10 backdrop-blur px-4 py-3 sm:px-5 sm:py-4">
-                <div className="text-white text-lg sm:text-xl md:text-2xl font-semibold tracking-tight">
+            {/* ✅ Better mobile layout: full-width pill with max width */}
+            <div className="absolute inset-0 p-4 sm:p-6 md:p-8 flex items-end">
+              <div className="w-full max-w-xl rounded-2xl border border-white/20 bg-white/10 backdrop-blur px-4 py-3 sm:px-5 sm:py-4">
+                <div className="text-white text-base sm:text-xl md:text-2xl font-semibold tracking-tight leading-tight">
                   Clean installs. Clear docs. Confident flying.
                 </div>
-                <div className="mt-1 text-white/85 text-sm sm:text-base">
+                <div className="mt-1 text-white/85 text-sm sm:text-base leading-snug">
                   We keep scope and communication simple so decisions stay easy.
                 </div>
               </div>
