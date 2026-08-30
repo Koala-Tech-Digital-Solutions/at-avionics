@@ -57,10 +57,8 @@ export default function Gallery() {
           const isBeforeAfter = !!(item.before && item.after);
 
           return (
-            <button
+            <div
               key={item.id}
-              type="button"
-              onClick={() => setSelected(item)}
               className="surface overflow-hidden text-left hover:shadow-lg transition"
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
@@ -70,22 +68,33 @@ export default function Gallery() {
                     after={item.thumbAfter || item.after}
                     alt={item.alt}
                     className="absolute inset-0"
+                    onIdleClick={() => setSelected(item)}
                   />
                 ) : (
-                  <img
-                    src={item.thumb || item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
+                  <button
+                    type="button"
+                    onClick={() => setSelected(item)}
+                    className="absolute inset-0"
+                  >
+                    <img
+                      src={item.thumb || item.image}
+                      alt={item.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  </button>
                 )}
               </div>
 
-              <div className="p-4">
+              <button
+                type="button"
+                onClick={() => setSelected(item)}
+                className="w-full p-4 text-left"
+              >
                 <div className="font-semibold text-slate-900">{item.title}</div>
                 <div className="mt-1 text-xs text-slate-600">{item.tag}</div>
-              </div>
-            </button>
+              </button>
+            </div>
           );
         })}
       </div>
