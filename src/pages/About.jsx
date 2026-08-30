@@ -14,14 +14,6 @@ export default function About() {
       initials: "RD",
     },
     {
-      name: "Wilfer Ossa",
-      role: "Quality Manager",
-      photo: "/images/team/wilfer-ossa.jpg",
-      bio: "Avionics specialist with extensive experience in troubleshooting, system integration, and inspections. Former Colombian Air Force avionics technician and inspector, currently supporting U.S. general aviation with a focus on clean panel upgrades, analog-to-digital conversions, and documentation-first installations. Holds an active FCC General Radiotelephone Operator License.",
-      initials: "WO",
-    },
-
-    {
       name: "Carlos Garcia",
       role: "Avionics Lead Technician",
       photo: "/images/team/carlos-garcia.jpg",
@@ -118,7 +110,7 @@ export default function About() {
           installs and dependable support.
         </p>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
           {team.map((p) => (
             <EmployeeCard key={p.name} person={p} />
           ))}

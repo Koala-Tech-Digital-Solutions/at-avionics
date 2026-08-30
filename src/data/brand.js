@@ -4,6 +4,6 @@ export const BRAND = {
   phone: "+1 (689) 239-2660",
   email: "info.atavionics@gmail.com",
   address:
-    "Deland Municipal Airport / 921 Biscayne Blvd, Unit E19, DeLand, FL 32724",
+    "Winter Haven Regional Airport / 2073 US-92, Hangar 213, Winter Haven, FL 33881",
   hours: "Mon–Fri 8:00am–5:00pm",
 };
